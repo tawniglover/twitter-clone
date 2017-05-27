@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
   $('#tweet-controls').hide();
+
   $(document).on('click', '.tweet-compose', function() {
     $('#tweet-controls').show();
     $(this).css('height', '5em');
@@ -20,19 +21,35 @@ $(document).ready(function(){
             $('.button').prop('disabled', false);
         }
     });
-// on tweet click capture submittedTweet and prepend it to stream
-
-
 
     $('#tweet-submit').on('click', function () {
       var submittedTweet = $('.tweet-compose').val();
-      var tweet = $('.tweet').first().clone()
+      var user = '@alagoon';
+      var photoUrl = 'img/alagoon.jpg';
+      var fullName = 'Samwise';
+      var tweet = $('.tweet').first().clone();
       tweet.find('.tweet-text').html(submittedTweet)
-
+      tweet.find('.username').html(user);
+      tweet.find('.avatar').attr('src', photoUrl);
+      tweet.find('.fullname').html(fullName);
       $('#stream').prepend(tweet)
+    });
 
-      //grab tweet html insert our code and prepen
+    $('.tweet').hover(function () {
+      $(this).find('.tweet-actions').show();
+    }, function() {
+      $('.tweet-actions').mouseleave('.tweet-actions').hide();
 
     })
+
+    $(document).on('click', '.tweet', function() {
+      $(this).find('.stats').show();
+      $(this).find('.reply').show();
+
+    });
+
+    $('.tweet-actions').hide();
+    $('.stats').hide();
+    $('.reply').hide();
 
 });
